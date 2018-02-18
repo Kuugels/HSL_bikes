@@ -2,6 +2,5 @@
 
 Made using node.js, JQuery, HTML, and CSS
 
-
-(git push citybikes)
-#TESTTESTESTESTEST
+Opening site may take some time 
+https://hsl-citybikes.herokuapp.com/
