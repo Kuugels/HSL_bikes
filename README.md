@@ -1,2 +1,3 @@
-# HSL_bikes
-Citybike guide
+# HSL citybike guide
+
+Made using node.js, JQuery, HTML, and CSS
