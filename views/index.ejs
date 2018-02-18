@@ -9,13 +9,13 @@
 
 <body>
 
-  <div class="page-header shadow">
-    <h1>Citybike guide</h1>
-  </div>
+  <div id="map"></div>
 
-  <div class="container">
+  <div class="container-fluid">
 
-    <div id="map"></div>
+    <div class="page-header shadow">
+      <h1>Citybike guide</h1>
+    </div>
 
     <div class="row">
       <div class="col-sm-3 shadow">
@@ -24,14 +24,8 @@
         <label for="to">To: </label>
         <input type="text" class="form-control" id="to">
       </div>
-
-      <!--<div class="col-sm-8" id="map">
-        <h1>MAP</h1>
-      </div>-->
     </div>
   </div>
-
-
 
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAr1rgLI8ffwjQn8A1AYSsFs2NIJFlT_XQ&callback=initMap">
