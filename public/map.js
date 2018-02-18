@@ -1,5 +1,4 @@
 
-
 // Initialize map and center it to helsinki
 function initMap() {
   console.log("Initialize map");
