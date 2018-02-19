@@ -1,6 +1,6 @@
 var map;
-var from;
-var to;
+var from = {address:String, marker:null};
+var to = {address:String, marker:null};
 
 // Initialize map and center it to helsinki
 function initMap() {
@@ -15,14 +15,15 @@ function initMap() {
 // Wait 1.5 seconds before searching and placing marker
 function findStartLocation() {
   setTimeout(function(){
-    from = $('#from').val();
+    from.address = $('#from').val();
+    console.log(from.address);
     placeMarker(from);
   }, 1500);
 }
 
 function findEndLocation() {
   setTimeout(function() {
-    to = $('#to').val();
+    to.address = $('#to').val();
     placeMarker(to);
   }, 1500);
 }
@@ -30,10 +31,13 @@ function findEndLocation() {
 function placeMarker(pos) {
   var geocoder = new google.maps.Geocoder();
 
-  geocoder.geocode({'address': pos}, function(results, status) {
+  geocoder.geocode({'address': pos.address}, function(results, status) {
   if (status === 'OK') {
     map.setCenter(results[0].geometry.location);
-    var marker = new google.maps.Marker({
+    if (pos.marker && pos.marker.setMap) {
+      pos.marker.setMap(null);
+    }
+    pos.marker = new google.maps.Marker({
       map: map,
       position: results[0].geometry.location,
     });
