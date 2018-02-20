@@ -1,22 +1,53 @@
 var map;
-var from = {address:String, marker:null};
-var to = {address:String, marker:null};
+var from = {address:String, marker:null, location:null};
+var to = {address:String, marker:null, location:null};
+var directionsService;
+var directionsDisplay;
 
 // Initialize map and center it to helsinki
 function initMap() {
+  directionsService = new google.maps.DirectionsService();
+  directionsDisplay = new google.maps.DirectionsRenderer();
   console.log("Initialize map");
   var helsinki = { lat: 60.1699, lng: 24.9384 };
   map = new google.maps.Map($('#map')[0], {
     zoom: 10,
     center: helsinki
   });
+  directionsDisplay.setMap(map);
+}
+
+function findNearestBikeStop() {
+  var bikes = getBikedata();
+}
+
+function calculateRoute() {
+
+  var checkExist = setInterval(function() {
+   if (from.location != null && to.location != null) {
+     //var dist = google.maps.geometry.sperical.computeDistanceBetween(from.location, to.location);
+     //console.log(dist);
+      console.log("Calculating route...");
+      var request = {
+        origin: from.location,
+        destination: to.location,
+        travelMode: 'WALKING'
+      };
+      directionsService.route(request, function(result, status) {
+        if (status == 'OK') {
+          directionsDisplay.setDirections(result);
+        }
+      });
+      clearInterval(checkExist);
+   }
+  }, 100); // check every 100ms
+
 }
 
 // Wait 1.5 seconds before searching and placing marker
 function findStartLocation() {
   setTimeout(function(){
     from.address = $('#from').val();
-    console.log(from.address);
     placeMarker(from);
   }, 1500);
 }
@@ -26,6 +57,7 @@ function findEndLocation() {
     to.address = $('#to').val();
     placeMarker(to);
   }, 1500);
+  calculateRoute();
 }
 
 function placeMarker(pos) {
@@ -33,10 +65,11 @@ function placeMarker(pos) {
 
   geocoder.geocode({'address': pos.address}, function(results, status) {
   if (status === 'OK') {
-    map.setCenter(results[0].geometry.location);
     if (pos.marker && pos.marker.setMap) {
       pos.marker.setMap(null);
     }
+    map.setCenter(results[0].geometry.location);
+    pos.location = results[0].geometry.location;
     pos.marker = new google.maps.Marker({
       map: map,
       position: results[0].geometry.location,

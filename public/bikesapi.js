@@ -23,3 +23,7 @@ function retrieveBikeInfo() {
   });
   console.log('Bike data retrieved succesfully...');
 }
+
+function getBikedata() {
+  return bikeArr;
+}
