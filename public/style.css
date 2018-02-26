@@ -31,6 +31,18 @@ html, body {
   color: white;
 }
 
+.btn-primary {
+  background-color: #dddddc;
+  margin-top: 10px;
+  border-radius: 20px;
+  color: #333333;
+  border: solid 1px lightgrey;
+}
+
+.btn-primary:hover {
+  background-color: #007AC9;
+}
+
 .row {
   max-width: 100%;
   margin-left: 5px;

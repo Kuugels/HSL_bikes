@@ -22,26 +22,21 @@ function findNearestBikeStop() {
 }
 
 function calculateRoute() {
-
-  var checkExist = setInterval(function() {
-   if (from.location != null && to.location != null) {
-     //var dist = google.maps.geometry.sperical.computeDistanceBetween(from.location, to.location);
-     //console.log(dist);
-      console.log("Calculating route...");
-      var request = {
-        origin: from.location,
-        destination: to.location,
-        travelMode: 'WALKING'
-      };
-      directionsService.route(request, function(result, status) {
-        if (status == 'OK') {
-          directionsDisplay.setDirections(result);
-        }
-      });
-      clearInterval(checkExist);
-   }
-  }, 100); // check every 100ms
-
+  from.marker.setMap(null);
+  to.marker.setMap(null);
+  if (from.location != null && to.location != null) {
+     console.log("Calculating route...");
+     var request = {
+       origin: from.location,
+       destination: to.location,
+       travelMode: 'WALKING'
+     };
+     directionsService.route(request, function(result, status) {
+       if (status == 'OK') {
+         directionsDisplay.setDirections(result);
+       }
+     });
+  }
 }
 
 // Wait 1.5 seconds before searching and placing marker
@@ -57,7 +52,6 @@ function findEndLocation() {
     to.address = $('#to').val();
     placeMarker(to);
   }, 1500);
-  calculateRoute();
 }
 
 function placeMarker(pos) {
