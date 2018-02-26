@@ -20,8 +20,10 @@
       <div class="col-sm-3 shadow">
         <label for="from">From: </label>
         <input type="text" class="form-control" id="from" onkeypress="findStartLocation()">
+        <div class="alert-danger" id="warn1">Empty field!</div>
         <label for="to">To: </label>
         <input type="text" class="form-control" id="to" onkeypress="findEndLocation()">
+        <div class="alert-danger" id="warn2">Empty field!</div>
         <button type="button" class="btn btn-primary" onclick="calculateRoute()">Calculate route</button>
       </div>
     </div>

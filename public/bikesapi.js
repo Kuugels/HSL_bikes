@@ -4,12 +4,6 @@ var url = 'https://api.citybik.es/v2/networks/citybikes-helsinki';
 
 $(document).ready(function() {
   retrieveBikeInfo();
-  var checkExist = setInterval(function() {
-   if (bikeArr["0"].name) {
-      console.log("Exists! "+ bikeArr["0"].name);
-      clearInterval(checkExist);
-   }
-}, 100); // check every 100ms
 })
 
 function retrieveBikeInfo() {
@@ -26,4 +20,12 @@ function retrieveBikeInfo() {
 
 function getBikedata() {
   return bikeArr;
+}
+
+function getLocations() {
+  var locationsArr = [];
+  $.each(bikeArr, function(index, station) {
+    locationsArr.push([station.latitude, station.longitude]);
+  });
+  return locationsArr;
 }
